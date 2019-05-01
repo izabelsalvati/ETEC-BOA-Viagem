@@ -7,13 +7,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ViagemActivity extends AppCompatActivity {
+import br.com.etechoracio.etec_boaviagem.utils.DateTimeUtils;
+
+public abstract class ViagemActivity extends AppCompatActivity {
 
     private Button btndataChegada;
     private Button btndataSaida;
+    private EditText editDestino;
+    private EditText editQuantidadePessoas;
+    private EditText editOrcamento;
+    private RadioGroup radioTipo;
+    public void onSalvar(View View)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +38,17 @@ public class ViagemActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener datachegada = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
-            String data = String.valueOf(dia)+ "/" + String.valueOf(mes + 1) + "/" + String.valueOf(ano);
-            btndataChegada.setText(data);
+            btndataChegada.setText(DateTimeUtils.formatDate(dia, mes + 1, ano));
         }
     };
-    protected Dialog onCreateDialog(int id){
+    private DatePickerDialog.OnDateSetListener datasaida = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
+            btndataSaida.setText(DateTimeUtils.formatDate(dia, mes + 1, ano));
+        }
+    };
+
+    protected Dialog onCreateDialog(int id) {
         Calendar cal = Calendar.getInstance();
         int ano = cal.get(Calendar.YEAR);
         int mes = cal.get(Calendar.MONTH);
@@ -41,25 +58,7 @@ public class ViagemActivity extends AppCompatActivity {
             case R.id.btndataChegada:
                 return new DatePickerDialog(this, datachegada, ano, mes, dia);
         }
-        return null;
-    }
-    public void onSelecionarData(View view){
-        showDialog(view.getId());
-    }
 
-
-    private DatePickerDialog.OnDateSetListener datasaida = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
-            String data = String.valueOf(dia)+ "/" + String.valueOf(mes + 1) + "/" + String.valueOf(ano);
-            btndataChegada.setText(data);
-        }
-    };
-    protected Dialog onCreateDialogg(int id){
-        Calendar cal = Calendar.getInstance();
-        int ano = cal.get(Calendar.YEAR);
-        int mes = cal.get(Calendar.MONTH);
-        int dia = cal.get(Calendar.DAY_OF_MONTH);
 
         switch (id) {
             case R.id.btndataSaida:
@@ -67,7 +66,8 @@ public class ViagemActivity extends AppCompatActivity {
         }
         return null;
     }
-    public void onSelecionarData2(View view){
+
+    public void onSelecionarData(View view) {
         showDialog(view.getId());
     }
 }

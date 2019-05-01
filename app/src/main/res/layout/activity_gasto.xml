@@ -75,6 +75,7 @@
                     android:id="@+id/btnData"
                     android:layout_width="191dp"
                     android:layout_height="wrap_content"
+                    android:onClick="onSelecionarDataGasto"
                     android:text="@string/mascara" />
             </TableRow>
 
