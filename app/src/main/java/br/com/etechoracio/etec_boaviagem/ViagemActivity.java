@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.RadioGroup;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,15 +14,10 @@ import java.util.Calendar;
 
 import br.com.etechoracio.etec_boaviagem.utils.DateTimeUtils;
 
-public abstract class ViagemActivity extends AppCompatActivity {
+public class ViagemActivity extends AppCompatActivity {
 
     private Button btndataChegada;
     private Button btndataSaida;
-    private EditText editDestino;
-    private EditText editQuantidadePessoas;
-    private EditText editOrcamento;
-    private RadioGroup radioTipo;
-    public void onSalvar(View View)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
